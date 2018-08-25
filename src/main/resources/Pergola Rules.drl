@@ -1,0 +1,32 @@
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import com.ninetailsoftware.model.facts.ElectricOutlet;
+import com.ninetailsoftware.model.events.HaEvent;
+
+rule "Turn off Pergola at Midnight"
+   timer(cron: 0 0 0 * * ?)
+when
+    ElectricOutlet(id == "48")
+then
+    HaEvent e = new HaEvent();
+    e.setDeviceId("48");
+    e.setSource("brms");
+    e.setValue("0");
+    
+    insert(e);
+end
+
+rule "Turn on Pergola at Dusk"
+
+when
+    HaEvent(deviceId =="23", value=="2")
+then
+    HaEvent e = new HaEvent();
+    e.setDeviceId("48");
+    e.setSource("brms");
+    e.setValue("255");
+    
+    insert(e);
+end

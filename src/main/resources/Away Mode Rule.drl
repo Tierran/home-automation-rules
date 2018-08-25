@@ -1,0 +1,14 @@
+import com.ninetailsoftware.model.events.HaEvent;
+import com.ninetailsoftware.model.facts.SimpleSwitch;
+
+rule "Set all switches to off"
+   when
+       ha : HaEvent( deviceId == "18" ) over window:time(1s)
+       s : SimpleSwitch(status != "0" && s.isDisableWhenAway() && ha.value == 2)
+   then
+       HaEvent event = new HaEvent();
+       event.setDeviceId(s.getId());
+       event.setValue("0");
+       event.setSource("brms");
+       insert(event);
+end

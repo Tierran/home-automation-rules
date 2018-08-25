@@ -1,0 +1,14 @@
+import com.ninetailsoftware.model.events.HaEvent;
+import com.ninetailsoftware.model.facts.SimpleSwitch;
+
+rule "Goodnight house"
+   when
+       ha : HaEvent( deviceId == "57" ) over window:time(1s)
+       s : SimpleSwitch(status != "0")
+   then
+       HaEvent event = new HaEvent();
+       event.setDeviceId(s.getId());
+       event.setValue("0");
+       event.setSource("brms");
+       insert(event);
+end

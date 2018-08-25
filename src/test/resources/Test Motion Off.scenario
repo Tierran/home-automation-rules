@@ -1,0 +1,113 @@
+<scenario>
+  <name>Test Motion Off.scenario</name>
+  <maxRuleFirings>100000</maxRuleFirings>
+  <globals/>
+  <fixtures>
+    <fact-data>
+      <type>HaEvent</type>
+      <fieldData>
+        <field-data>
+          <name>deviceId</name>
+          <value>32</value>
+          <nature>4</nature>
+        </field-data>
+        <field-data>
+          <name>value</name>
+          <value>0</value>
+          <nature>4</nature>
+        </field-data>
+      </fieldData>
+      <name>motion</name>
+      <isModify>false</isModify>
+    </fact-data>
+    <fact-data>
+      <type>SimpleSwitch</type>
+      <fieldData>
+        <field-data>
+          <name>id</name>
+          <value>24</value>
+          <nature>4</nature>
+        </field-data>
+        <field-data>
+          <name>floor</name>
+          <value>Second Floor</value>
+          <nature>4</nature>
+        </field-data>
+        <field-data>
+          <name>room</name>
+          <value>Office</value>
+          <nature>4</nature>
+        </field-data>
+        <field-data>
+          <name>status</name>
+          <value>255</value>
+          <nature>4</nature>
+        </field-data>
+      </fieldData>
+      <name>s</name>
+      <isModify>false</isModify>
+    </fact-data>
+    <fact-data>
+      <type>MotionSensor</type>
+      <fieldData>
+        <field-data>
+          <name>id</name>
+          <value>32</value>
+          <nature>4</nature>
+        </field-data>
+      </fieldData>
+      <name>m</name>
+      <isModify>false</isModify>
+    </fact-data>
+    <execution-trace>
+      <executionTimeResult>18</executionTimeResult>
+      <numberOfRulesFired>6</numberOfRulesFired>
+    </execution-trace>
+    <expect-rule>
+      <ruleName>Turn Lights On with Motion</ruleName>
+      <explanation>Rule [Turn Lights On with Motion] was not activated.</explanation>
+      <expectedFire>false</expectedFire>
+      <successResult>true</successResult>
+      <actualResult>0</actualResult>
+    </expect-rule>
+    <expect-fact>
+      <fieldValues>
+        <expect-field>
+          <fieldName>status</fieldName>
+          <expected>0</expected>
+          <actualResult>255</actualResult>
+          <successResult>true</successResult>
+          <explanation>[SimpleSwitch] field [status] was [0].</explanation>
+          <operator>==</operator>
+          <nature>1</nature>
+        </expect-field>
+      </fieldValues>
+      <name>SimpleSwitch</name>
+      <anonymous>true</anonymous>
+    </expect-fact>
+  </fixtures>
+  <lastRunResult>2017-09-29 17:10:52.956 UTC</lastRunResult>
+  <rules>
+    <string>Turn Lights On with Motion</string>
+    <string>Update Device Status</string>
+    <string>Turn Off Lights with No Motion</string>
+  </rules>
+  <inclusive>true</inclusive>
+  <packageName></packageName>
+  <imports>
+    <imports>
+      <org.drools.workbench.models.datamodel.imports.Import>
+        <type>com.ninetailsoftware.model.events.HaEvent</type>
+      </org.drools.workbench.models.datamodel.imports.Import>
+      <org.drools.workbench.models.datamodel.imports.Import>
+        <type>com.ninetailsoftware.model.facts.MotionSensor</type>
+      </org.drools.workbench.models.datamodel.imports.Import>
+      <org.drools.workbench.models.datamodel.imports.Import>
+        <type>com.ninetailsoftware.model.facts.SimpleSwitch</type>
+      </org.drools.workbench.models.datamodel.imports.Import>
+    </imports>
+  </imports>
+  <ksessions>
+    <string>myKieSession</string>
+  </ksessions>
+</scenario>

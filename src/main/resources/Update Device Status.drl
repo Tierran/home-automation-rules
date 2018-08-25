@@ -1,0 +1,15 @@
+import com.ninetailsoftware.model.events.HaEvent;
+import com.ninetailsoftware.model.facts.Device;
+
+rule "Update Device Status"
+no-loop true
+salience 10
+when
+    d : Device ( )
+    ha : HaEvent ( d.id == ha.deviceId ) over window:length(1)
+    eval (ha.getValue() != d.getStatus())
+then
+    d.setStatus(ha.getValue());
+    d.setSource(ha.getSource());
+    update(d);
+end
