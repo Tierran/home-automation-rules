@@ -4,7 +4,7 @@ import com.ninetailsoftware.model.facts.SimpleSwitch;
 rule "Goodnight house"
    when
        ha : HaEvent( deviceId == "57" ) over window:time(1s)
-       s : SimpleSwitch(status != "0")
+       s : SimpleSwitch(status != "0" && floor != "Outdoors")
    then
        HaEvent event = new HaEvent();
        event.setDeviceId(s.getId());
