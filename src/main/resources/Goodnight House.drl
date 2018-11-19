@@ -29,7 +29,8 @@ end
 rule "2nd Level Power"
    when
        ha : HaEvent( deviceId == "74" )
-       s : SimpleSwitch(status != "0" && floor == "First Floor")
+       HaEvent( deviceId != ha.deviceId, this after[0,10s] ha)
+       s : SimpleSwitch(status != "0" && floor == "Second Floor")
    then
        HaEvent event = new HaEvent();
        event.setDeviceId(s.getId());
