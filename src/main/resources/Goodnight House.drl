@@ -16,6 +16,7 @@ end
 rule "1st Level Power"
    when
        ha : HaEvent( deviceId == "73" )
+       HaEvent( deviceId != ha.deviceId, this after[0,10s] ha)
        s : SimpleSwitch(status != "0" && floor == "First Floor")
    then
        HaEvent event = new HaEvent();
