@@ -12,3 +12,27 @@ rule "Goodnight house"
        event.setSource("brms");
        insert(event);
 end
+
+rule "1st Level Power"
+   when
+       ha : HaEvent( deviceId == "73" )
+       s : SimpleSwitch(status != "0" && floor == "First Floor")
+   then
+       HaEvent event = new HaEvent();
+       event.setDeviceId(s.getId());
+       event.setValue("0");
+       event.setSource("brms");
+       insert(event);
+end
+
+rule "2nd Level Power"
+   when
+       ha : HaEvent( deviceId == "74" )
+       s : SimpleSwitch(status != "0" && floor == "First Floor")
+   then
+       HaEvent event = new HaEvent();
+       event.setDeviceId(s.getId());
+       event.setValue("0");
+       event.setSource("brms");
+       insert(event);
+end
