@@ -16,7 +16,7 @@ end
 rule "1st Level Power"
    when
        ha : HaEvent( deviceId == "73" )
-       HaEvent( deviceId != ha.deviceId, this after[0,10s] ha)
+       HaEvent( deviceId == ha.deviceId, this after[0,2s] ha)
        s : SimpleSwitch(status != "0" && floor == "First Floor")
    then
        HaEvent event = new HaEvent();
@@ -29,7 +29,7 @@ end
 rule "2nd Level Power"
    when
        ha : HaEvent( deviceId == "74" )
-       HaEvent( deviceId != ha.deviceId, this after[0,10s] ha)
+       HaEvent( deviceId == ha.deviceId, this after[0,2s] ha)
        s : SimpleSwitch(status != "0" && floor == "Second Floor")
    then
        HaEvent event = new HaEvent();
