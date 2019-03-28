@@ -6,7 +6,7 @@ no-loop true
 salience 10
 when
     d : Device ( )
-    ha : HaEvent ( d.id == ha.deviceId ) over window:length(1)
+    ha : HaEvent ( d.id == ha.deviceId ) over (window:length(1) and window:time(1s))
     eval (ha.getValue() != d.getStatus())
 then
     d.setStatus(ha.getValue());

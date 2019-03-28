@@ -2,7 +2,7 @@ import com.ninetailsoftware.model.events.HaEvent;
 
 rule "ADT Email Alarm Armed Away"
 when
-    HaEvent(value contains "Security System Armed Away")
+    HaEvent(value contains "Security System Armed Away") over window:time(1s)
 then
     HaEvent ha = new HaEvent();
     ha.setSource("adt");
@@ -14,7 +14,7 @@ end
 
 rule "ADT Email Alarm Armed Stay"
 when
-    HaEvent(value contains "Security System Armed Stay")
+    HaEvent(value contains "Security System Armed Stay") over window:time(1s)
 then
     HaEvent ha = new HaEvent();
     ha.setSource("adt");
@@ -26,7 +26,7 @@ end
 
 rule "ADT Email Alarm Disarmed"
 when
-    HaEvent(value contains "Security System Disarmed")
+    HaEvent(value contains "Security System Disarmed") over window:time(1s)
 then
     HaEvent ha = new HaEvent();
     ha.setSource("adt");

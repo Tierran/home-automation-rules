@@ -21,7 +21,7 @@ end
 rule "Turn on Pergola at Dusk"
 
 when
-    HaEvent(deviceId =="23", value=="2")
+    HaEvent(deviceId =="23", value=="2") over window:time(1s)
 then
     HaEvent e = new HaEvent();
     e.setDeviceId("48");

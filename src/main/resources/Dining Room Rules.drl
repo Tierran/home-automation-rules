@@ -22,7 +22,7 @@ end */
 
 rule "Turn Lights On When Off with Remote Switch"
 when
-    ha : HaEvent(deviceId == "36")
+    ha : HaEvent(deviceId == "36") over window:time(2s)
     SimpleSwitch(id == "25" && status == "0")
     not(exists HaEvent(deviceId == " 25") over window:time(2s))
 then
@@ -36,7 +36,7 @@ end
 
 rule "Turn Lights Off When On with Remote Switch"
 when
-    ha : HaEvent(deviceId == "36")
+    ha : HaEvent(deviceId == "36") over window:time(2s)
     SimpleSwitch(id == "25" && status != "0")
     not(exists HaEvent(deviceId == " 25") over window:time(2s))
 then

@@ -4,8 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import com.ninetailsoftware.model.facts.SimpleSwitch;
 import com.ninetailsoftware.model.events.HaEvent;
+import com.ninetailsoftware.model.facts.AlarmPanel;
+import com.ninetailsoftware.model.facts.TheSun;
 
-rule "Turn off front porch at 0000"
+rule "Turn off front flood at 0000"
    timer(cron: 0 0 0 * * ?)
 when
     SimpleSwitch(id == "54")
@@ -18,10 +20,24 @@ then
     insert(e);
 end
 
-rule "Turn on front port at Dusk"
+rule "Turn on front flood at Dusk"
 
 when
-    HaEvent(deviceId =="23", value=="2")
+    HaEvent(deviceId =="23", value=="2") over window:time(1s)
+then
+    HaEvent e = new HaEvent();
+    e.setDeviceId("54");
+    e.setSource("brms");
+    e.setValue("255");
+    
+    insert(e);
+end
+
+rule "Turn on front port at Dusk when away"
+
+when
+	$thesun : HaEvent(deviceId == "23", value == "2")
+	$alarm : HaEvent(deviceId == "18", value == "2", $thesun overlappedby $alarm)
 then
     HaEvent e = new HaEvent();
     e.setDeviceId("54");
