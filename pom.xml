@@ -58,8 +58,7 @@
 		<dependency>
 			<groupId>com.ninetailsoftware</groupId>
 			<artifactId>HomeAutomationModel</artifactId>
-			<version>0.2.5</version>
-			<scope>compile</scope>
+			<version>0.2.6</version>
 		</dependency>
 	</dependencies>
 	<build>

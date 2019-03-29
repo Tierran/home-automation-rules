@@ -33,14 +33,14 @@ then
     insert(e);
 end
 
-rule "Turn on front port at Dusk when away"
+rule "Turn on front porch at Dusk when away"
 
 when
 	$thesun : HaEvent(deviceId == "23", value == "2")
 	$alarm : HaEvent(deviceId == "18", value == "2", $thesun overlappedby $alarm)
 then
     HaEvent e = new HaEvent();
-    e.setDeviceId("54");
+    e.setDeviceId("55");
     e.setSource("brms");
     e.setValue("255");
     
