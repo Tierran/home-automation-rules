@@ -5,8 +5,8 @@ import java.util.Calendar;
 import com.ninetailsoftware.model.facts.ElectricOutlet;
 import com.ninetailsoftware.model.events.HaEvent;
 
-rule "Turn off Pergola at Midnight"
-   timer(cron: 0 0 0 * * ?)
+rule "Turn off Pergola automatically"
+   timer(cron: 0 21 0 * * ?)
 when
     ElectricOutlet(id == "48")
 then
