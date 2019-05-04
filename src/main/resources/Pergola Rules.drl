@@ -6,7 +6,7 @@ import com.ninetailsoftware.model.facts.ElectricOutlet;
 import com.ninetailsoftware.model.events.HaEvent;
 
 rule "Turn off Pergola automatically"
-   timer(cron: 0 21 0 * * ?)
+   timer(cron: 0 0 21 * * ?)
 when
     ElectricOutlet(id == "48")
 then
