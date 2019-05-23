@@ -33,6 +33,7 @@ then
     insert(e);
 end
 
+/**
 rule "Turn on front porch at Dusk when away"
 
 when
@@ -46,3 +47,4 @@ then
     
     insert(e);
 end
+*/

@@ -1,16 +1,19 @@
 import com.ninetailsoftware.model.events.HaEvent;
 import com.ninetailsoftware.model.facts.Device;
 
+declare HaEvent  
+      @role(event)  
+      @expires(48h)
+end  
+
 rule "Update Device Status"
 no-loop true
 salience 10
 when
     d : Device ( )
-    ha : HaEvent ( d.id == ha.deviceId ) over window:length(1)
-    HaEvent(this.deviceId == ha.deviceId) over window:time(1s)
-    eval (ha.getValue() != d.getStatus())
+    ha : HaEvent ( d.id == ha.deviceId && d.source == ha.source && ha.value != d.status) over window:time(1s)
 then
     d.setStatus(ha.getValue());
-    d.setSource(ha.getSource());
+    d.setSendUpdate(ha.isSendUpdate());
     update(d);
 end

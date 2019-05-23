@@ -6,18 +6,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ninetailsoftware.ha</groupId>
 	<artifactId>home-automation-rules</artifactId>
-	<version>0.2.63</version>
+	<version>0.5.0</version>
 	<properties>
-		<version.org.drools>7.9.0.Final</version.org.drools>
+		<version.org.drools>7.19.0.Final</version.org.drools>
 	</properties>
 	<packaging>kjar</packaging>
 	<name>home-automation-rules</name>
-	<distributionManagement>
-		<repository>
-			<id>home-automation</id>
-			<url>http://homemonitor.local:8081/repository/home-automation/</url>
-		</repository>
-	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
@@ -58,7 +52,7 @@
 		<dependency>
 			<groupId>com.ninetailsoftware</groupId>
 			<artifactId>HomeAutomationModel</artifactId>
-			<version>0.2.6</version>
+			<version>0.2.7</version>
 		</dependency>
 	</dependencies>
 	<build>

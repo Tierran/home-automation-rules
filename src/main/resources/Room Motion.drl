@@ -31,7 +31,7 @@ then
     insert(event);
 end
 */
-
+/*
 rule "Turn Off Office Lights With No Motion"
 when
     e1 : HaEvent (value == "0" && deviceId == "32")
@@ -43,4 +43,4 @@ then
     office.setSource("brms");
     
     insert(office);
-end
+end*/
