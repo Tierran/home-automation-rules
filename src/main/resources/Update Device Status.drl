@@ -3,7 +3,7 @@ import com.ninetailsoftware.model.facts.Device;
 
 declare HaEvent  
       @role(event)  
-      @expires(48h)
+      @expires(value = 48h, policy = TIME_SOFT)
 end  
 
 rule "Update Device Status"
