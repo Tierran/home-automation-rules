@@ -12,7 +12,9 @@ then
     HaEvent event = new HaEvent();
     event.setDeviceId(s.getId());
     event.setValue("255"); 
-    event.setSource("brms");
+    event.setSource("homeseer");
+    event.setSendUpdate(true);
+    
     insert(event);
 end
 

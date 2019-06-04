@@ -5,9 +5,10 @@ when
     HaEvent(value contains "Security System Armed Away") over window:time(1s)
 then
     HaEvent ha = new HaEvent();
-    ha.setSource("adt");
+    ha.setSource("homeseer");
     ha.setValue("2");
     ha.setDeviceId("18");
+    ha.setSendUpdate(true);
     
     insert(ha);
 end
@@ -17,9 +18,10 @@ when
     HaEvent(value contains "Security System Armed Stay") over window:time(1s)
 then
     HaEvent ha = new HaEvent();
-    ha.setSource("adt");
+    ha.setSource("homeseer");
     ha.setValue("1");
     ha.setDeviceId("18");
+    ha.setSendUpdate(true);
     
     insert(ha);
 end
@@ -29,9 +31,10 @@ when
     HaEvent(value contains "Security System Disarmed") over window:time(1s)
 then
     HaEvent ha = new HaEvent();
-    ha.setSource("adt");
+    ha.setSource("homeseer");
     ha.setValue("0");
     ha.setDeviceId("18");
+    ha.setSendUpdate(true);    
     
     insert(ha);
 end

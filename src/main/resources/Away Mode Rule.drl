@@ -9,6 +9,7 @@ rule "Set all switches to off"
        HaEvent event = new HaEvent();
        event.setDeviceId(s.getId());
        event.setValue("0");
-       event.setSource("brms");
+       event.setSource("homeseer");
+       event.setSendUpdate(true);
        insert(event);
 end

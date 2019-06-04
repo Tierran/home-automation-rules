@@ -14,8 +14,9 @@ when
 then
     HaEvent e = new HaEvent();
     e.setDeviceId("54");
-    e.setSource("brms");
+    e.setSource("homeseer");
     e.setValue("0");
+    e.setSendUpdate(true);
     
     insert(e);
 end
@@ -27,8 +28,9 @@ when
 then
     HaEvent e = new HaEvent();
     e.setDeviceId("54");
-    e.setSource("brms");
+    e.setSource("homeseer");
     e.setValue("255");
+    e.setSendUpdate(true);
     
     insert(e);
 end

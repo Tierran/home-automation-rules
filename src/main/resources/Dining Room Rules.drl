@@ -30,7 +30,8 @@ then
     HaEvent event = new HaEvent();
     event.setDeviceId("25");
     event.setValue("99");
-    event.setSource("brms");
+    event.setSource("homeseer");
+    event.setSendUpdate(true);
     insert(event);
 end
 

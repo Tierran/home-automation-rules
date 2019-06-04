@@ -12,7 +12,8 @@ then
     HaEvent secondFloorLanding = new HaEvent();
     secondFloorLanding.setValue("33");
     secondFloorLanding.setDeviceId("26");
-    secondFloorLanding.setSource("brms");
+    secondFloorLanding.setSource("homeseer");
+    secondFloorLanding.setSendUpdate(true);
     
     insert (secondFloorLanding);
 end
@@ -26,7 +27,8 @@ then
     HaEvent diningRoom = new HaEvent();
     diningRoom.setValue("33");
     diningRoom.setDeviceId("25");
-    diningRoom.setSource("brms");
+    diningRoom.setSource("homeseer");
+    diningRoom.setSendUpdate(true);
     
     insert(diningRoom);
 end
@@ -39,7 +41,8 @@ then
     HaEvent diningRoom = new HaEvent();
     diningRoom.setValue("0");
     diningRoom.setDeviceId("25");
-    diningRoom.setSource("brms");
+    diningRoom.setSource("homeseer");
+    diningRoom.setSendUpdate(true);
     
     insert(diningRoom);
 end
@@ -52,7 +55,8 @@ then
     HaEvent secondFloorLanding = new HaEvent();
     secondFloorLanding.setValue("0");
     secondFloorLanding.setDeviceId("26");
-    secondFloorLanding.setSource("brms");
+    secondFloorLanding.setSource("homeseer");
+    secondFloorLanding.setSendUpdate(true);
     
     insert (secondFloorLanding);
 end
