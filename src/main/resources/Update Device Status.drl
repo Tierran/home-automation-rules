@@ -14,6 +14,9 @@ when
     ha : HaEvent ( d.id == ha.deviceId && d.source == ha.source && ha.value != d.status) over window:time(1s)
 then
     d.setStatus(ha.getValue());
-    d.setSendUpdate(ha.isSendUpdate());
+    if(ha.isSendUpdate() != null)
+    	d.setSendUpdate(ha.isSendUpdate());
+    else
+    	d.setSendUpdate(false);
     update(d);
 end
