@@ -14,6 +14,7 @@ then
     e.setDeviceId("71");
     e.setSource("brms");
     e.setValue("0");
+    event.setSendUpdate(true);
     
     insert(e);
 end
@@ -27,6 +28,7 @@ then
     e.setDeviceId("71");
     e.setSource("brms");
     e.setValue("255");
+    event.setSendUpdate(true);
     
     insert(e);
 end
