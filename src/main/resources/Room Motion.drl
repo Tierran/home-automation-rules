@@ -1,6 +1,7 @@
 import com.ninetailsoftware.model.events.HaEvent;
 import com.ninetailsoftware.model.facts.SimpleSwitch;
 import com.ninetailsoftware.model.facts.MotionSensor;
+import com.ninetailsoftware.model.facts.Room;
 
 rule "Turn Lights On with Motion"
 when
@@ -18,21 +19,60 @@ then
     insert(event);
 end
 
+rule "Set Room Occupied with Motion"
+when
+    e : HaEvent (e.value == "8") over window:time(5s)
+    m : MotionSensor(m.id == e.deviceId )
+    r : Room(r.status != "OCCUPIED" && r.floor == m.floor && r.room == m.room)
+then
+	r.setStatus("OCCUPIED");
+	System.out.println(r.getRoom() + " is now OCCUPIED");
+	
+	update(r);
+end
+
+rule "Set Room Possibly Unoccupied"
+when
+	e1 : HaEvent (e1.value == "8")
+	m1 : MotionSensor(m1.id == e1.deviceId)
+	r1 : Room(r1.floor == m1.floor && r1.room == m1.room)
+	r2 : Room(r2.status == "OCCUPIED" && r2.adjacentRooms contains r1.id)
+	e2 : HaEvent(e2.room == r2.room && e2.floor == r2.floor && e2.value == "8" && this after [10s,20s] e1)
+then
+	r2.setStatus("POSSIBLY_UNOCCUPIED");
+	System.out.println(r2.getRoom() + " is " + r2.getStatus());
+	update(r2);
+end
 /**
+rule "Set Possibly Unoccupied Room to Unoccupied"
+when
+	e : HaEvent (e.value == "0") over window:length(1)
+    m : MotionSensor(m.id == e.deviceId)
+    r : Room(r.floor == m.floor && r.room == m.room && s.status != "POSSIBLY_UNOCCUPIED")
+    not (exists HaEvent(m.id == deviceId) over window:time(5m))
+then
+	r.setStatus("UNOCCUPIED");
+	update(r);
+end; 
+
+
 rule "Turn Off Lights with No Motion"
 when
     e : HaEvent (e.value == "0") over window:length(1)
     m : MotionSensor(m.id == e.deviceId)
     s : SimpleSwitch(s.floor == m.floor && s.room == m.room && s.status != 0)
+    r : Room(r.floor == && s.floor && r.room == s.room && r.status == "UNOCCUPIED")
     not (exists HaEvent(m.id == deviceId) over window:time(15m))
 then
     HaEvent event = new HaEvent();
     event.setDeviceId(s.getId());
     event.setValue("0"); 
-    event.setSource("brms");
+    event.setSource(s.getSource());
+    event.setSendUpdate(true);
+    
     insert(event);
 end
-*/
+
 /*
 rule "Turn Off Office Lights With No Motion"
 when
