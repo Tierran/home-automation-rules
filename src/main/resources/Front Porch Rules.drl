@@ -35,18 +35,18 @@ then
     insert(e);
 end
 
-/**
+
 rule "Turn on front porch at Dusk when away"
 
 when
-	$thesun : HaEvent(deviceId == "23", value == "2")
-	$alarm : HaEvent(deviceId == "18", value == "2", $thesun overlappedby $alarm)
+	TheSun(id == "23" && (status == "2" || status == "3"))
+	AlarmPanel(id == "18" && status == "2")
 then
     HaEvent e = new HaEvent();
     e.setDeviceId("55");
-    e.setSource("brms");
+    e.setSource("homeseer");
     e.setValue("255");
+    e.setSendUpdate(true);
     
     insert(e);
 end
-*/

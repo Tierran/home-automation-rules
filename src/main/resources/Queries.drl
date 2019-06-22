@@ -1,5 +1,5 @@
 import com.ninetailsoftware.model.events.HaEvent;
 
 query "Event Count"  (int x)
-    haEvent : HaEvent( deviceId == x)
+    haEvent : HaEvent( )
 end
