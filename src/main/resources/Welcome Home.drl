@@ -47,7 +47,7 @@ then
     insert(diningRoom);
 end
 
-rule "Turn Off 2nd floor landing  Lights When Noone Enters"
+rule "Turn Off 2nd floor landing Lights When Noone Enters"
 when
     not(exists HaEvent (value == "8" && deviceId == "27") over window:time(1m))
     AlarmPanel (status == "2")

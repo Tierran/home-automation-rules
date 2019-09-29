@@ -7,7 +7,7 @@ import com.ninetailsoftware.model.events.HaEvent;
 import com.ninetailsoftware.model.facts.AlarmPanel;
 import com.ninetailsoftware.model.facts.TheSun;
 
-rule "Turn off front flood at 0000"
+rule "Turn off front flood at Midnight"
    timer(cron: 0 0 0 * * ?)
 when
     SimpleSwitch(id == "54")
