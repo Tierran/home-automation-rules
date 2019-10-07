@@ -6,13 +6,13 @@ import com.ninetailsoftware.model.facts.ElectricOutlet;
 import com.ninetailsoftware.model.events.HaEvent;
 
 rule "Turn off holiday lights at 10:00"
-   timer(cron: 0 22 0 * * ?)
+   timer(cron: 0 0 22 * * ?)
 when
     ElectricOutlet(id == "71")
 then
     HaEvent e = new HaEvent();
     e.setDeviceId("71");
-    e.setSource("brms");
+    e.setSource("homeseer");
     e.setValue("0");
     e.setSendUpdate(true);
     
@@ -26,7 +26,7 @@ when
 then
     HaEvent e = new HaEvent();
     e.setDeviceId("71");
-    e.setSource("brms");
+    e.setSource("homeseer");
     e.setValue("255");
     e.setSendUpdate(true);
     
