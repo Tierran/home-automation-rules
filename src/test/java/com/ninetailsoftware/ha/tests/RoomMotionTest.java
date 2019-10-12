@@ -23,7 +23,7 @@ public class RoomMotionTest extends MyTestHelper{
 		ksession.addEventListener(agendaEventListener);
 	
 		SimpleSwitch officeLight = new SimpleSwitch();
-		officeLight.setId("25");
+		officeLight.setId("24");
 		officeLight.setSource("homeseer");
 		officeLight.setStatus("255");
 		officeLight.setDisableWhenAway(false);
@@ -31,21 +31,21 @@ public class RoomMotionTest extends MyTestHelper{
 		officeLight.setRoom("Office");
 		
 		MotionSensor ms = new MotionSensor();
-		ms.setId("32");
+		ms.setId("34");
 		ms.setFloor("Second Floor");
 		ms.setRoom("Office");
 		
 	    HaEvent ha = new HaEvent();
 	    ha.setSource("homeseer");
 	    ha.setValue("0");
-	    ha.setDeviceId("32");
+	    ha.setDeviceId("34");
 	    ha.setFloor("Second Floor");
 	    ha.setRoom("Office");
 	    
 	    HaEvent ha2 = new HaEvent();
 	    ha2.setSource("homeseer");
 	    ha2.setValue("8");
-	    ha2.setDeviceId("32");
+	    ha2.setDeviceId("34");
 	    ha2.setFloor("Second Floor");
 	    ha2.setRoom("Office");
 	    
@@ -61,7 +61,7 @@ public class RoomMotionTest extends MyTestHelper{
 		
 		Assert.assertEquals("Check that office light is still on", "255", officeLight.getStatus());
 		
-		clock.advanceTime(61, TimeUnit.HOURS);
+		clock.advanceTime(1, TimeUnit.HOURS);
 		agendaEventListener.reset();
 		ksession.fireAllRules();
 		
