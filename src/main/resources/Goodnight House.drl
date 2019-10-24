@@ -4,7 +4,7 @@ import com.ninetailsoftware.model.facts.SimpleSwitch;
 rule "Goodnight house"
 no-loop
    when
-       ha : HaEvent( deviceId == "57" && value == "0") over window:length(1)
+       ha : HaEvent( deviceId == "57" && value == "0") over window:time(1s)
        s : SimpleSwitch(status != "0" && floor != "Outdoors")
    then
        HaEvent event = new HaEvent();
@@ -16,10 +16,9 @@ no-loop
 end
 
 rule "Enable Goodnight house switch"
-no-loop
    when
-       ha : HaEvent( value != "0") over window:length(1)
-       exists (SimpleSwitch(ha.deviceId == id && floor != "Outdoors"))
+       SimpleSwitch(id == "57" && status == "0")
+       exists (SimpleSwitch((floor != "Outdoors" && floor != "Hidden") && status != "0"))
    then
        HaEvent event = new HaEvent();
        event.setDeviceId("57");
@@ -30,10 +29,9 @@ no-loop
 end
 
 rule "Enable first floor switch"
-no-loop
    when
-       ha : HaEvent( value != "0") over window:length(1)
-       exists (SimpleSwitch(ha.deviceId == id && floor == "First Floor"))
+       SimpleSwitch(id == "73" && status == "0")
+       exists (SimpleSwitch(floor == "First Floor" && status != "0"))
    then
        HaEvent event = new HaEvent();
        event.setDeviceId("73");
@@ -44,10 +42,9 @@ no-loop
 end
 
 rule "Enable second floor switch"
-no-loop
    when
-       ha : HaEvent( value != "0") over window:length(1)
-       exists (SimpleSwitch(ha.deviceId == id && floor == "Second Floor"))
+       SimpleSwitch(id == "74" && status == "0")
+       exists (SimpleSwitch(floor == "Second Floor" && status != "0"))
    then
        HaEvent event = new HaEvent();
        event.setDeviceId("74");
@@ -59,9 +56,8 @@ end
 
 
 rule "1st Level Power"
-no-loop
    when
-       ha : HaEvent( deviceId == "73" ) over window:length(1)
+       ha : HaEvent( deviceId == "73" && value == "0") over window:time(1s)
        s : SimpleSwitch(status != "0" && floor == "First Floor")
    then
        HaEvent event = new HaEvent();
@@ -73,9 +69,8 @@ no-loop
 end
 
 rule "2nd Level Power"
-no-loop
    when
-       ha : HaEvent( deviceId == "74" ) over window:length(1)
+       ha : HaEvent( deviceId == "74" && value == "0") over window:time(1s)
        s : SimpleSwitch(status != "0" && floor == "Second Floor")
    then
        HaEvent event = new HaEvent();

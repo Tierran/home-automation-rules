@@ -76,6 +76,7 @@ public class GoodnightHouseRulesTest extends MyTestHelper{
 		HaEvent event = new HaEvent();
 		event.setDeviceId("26");
 		event.setValue("255");
+		event.setSource("homeseer");
 		
 		ksession.insert(ss1);
 		ksession.insert(ss2);
@@ -108,6 +109,7 @@ public class GoodnightHouseRulesTest extends MyTestHelper{
 		HaEvent event = new HaEvent();
 		event.setDeviceId("26");
 		event.setValue("255");
+		event.setSource("homeseer");
 		
 		ksession.insert(ss1);
 		ksession.insert(ss2);
@@ -140,6 +142,7 @@ public class GoodnightHouseRulesTest extends MyTestHelper{
 		HaEvent event = new HaEvent();
 		event.setDeviceId("24");
 		event.setValue("255");
+		event.setSource("homeseer");
 		
 		ksession.insert(ss1);
 		ksession.insert(ss2);
@@ -179,6 +182,7 @@ public class GoodnightHouseRulesTest extends MyTestHelper{
 		
 		HaEvent event = new HaEvent();
 		event.setDeviceId("73");
+		event.setValue("0");
 
 		ksession.insert(ss1);
 		ksession.insert(ss2);
@@ -221,6 +225,8 @@ public class GoodnightHouseRulesTest extends MyTestHelper{
 		
 		HaEvent event = new HaEvent();
 		event.setDeviceId("74");
+		event.setSource("homeseer");
+		event.setValue("0");
 
 		ksession.insert(ss1);
 		ksession.insert(ss2);
