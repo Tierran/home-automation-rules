@@ -43,6 +43,18 @@ rule "Disable Goodnight house switch"
        insert(event);
 end
 
+rule "Disable first floor switch"
+   when
+       not (exists (SimpleSwitch(floor == "First Floor" && status != "0")))
+   then
+       HaEvent event = new HaEvent();
+       event.setDeviceId("73");
+       event.setValue("0");
+       event.setSource("homeseer");
+       event.setSendUpdate(true);
+       insert(event);
+end
+
 rule "Enable first floor switch"
    when
        ha : HaEvent(value != "0") over window:time(1s)

@@ -253,6 +253,39 @@ public class GoodnightHouseRulesTest extends MyTestHelper{
 		KieSession ksession = testHelper("Update Device Status.drl", "Goodnight House.drl");
 		
 		SimpleSwitch ss1 = new SimpleSwitch();
+		ss1.setId("26");
+		ss1.setSource("homeseer");
+		ss1.setStatus("255");
+		ss1.setFloor("First Floor");
+		ss1.setRoom("Dining Room");
+		ss1.setDisableWhenAway(false);
+		
+		SimpleSwitch ss2 = new SimpleSwitch();
+		ss2.setId("73");
+		ss2.setSource("homeseer");
+		ss2.setStatus("0");
+		ss2.setFloor("Hidden");
+		ss2.setRoom("Hidden");
+		ss2.setDisableWhenAway(false);
+		
+		HaEvent event = new HaEvent();
+		event.setDeviceId("26");
+		event.setSource("homeseer");
+		event.setValue("0");
+
+		ksession.insert(ss1);
+		ksession.insert(ss2);
+		ksession.insert(event);
+		ksession.fireAllRules();
+		
+		Assert.assertEquals("First floor switch disabled", "0", ss2.getStatus());
+	}
+	
+	@Test
+	public void testDisableFirstFloorSwitch() throws Exception {
+		KieSession ksession = testHelper("Update Device Status.drl", "Goodnight House.drl");
+		
+		SimpleSwitch ss1 = new SimpleSwitch();
 		ss1.setId("57");
 		ss1.setSource("homeseer");
 		ss1.setStatus("100");
