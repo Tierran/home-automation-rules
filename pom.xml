@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ninetailsoftware.ha</groupId>
 	<artifactId>home-automation-rules</artifactId>
-	<version>0.5.9</version>
+	<version>0.5.10</version>
 	<properties>
 		<version.org.drools>7.19.0.Final</version.org.drools>
 	</properties>
