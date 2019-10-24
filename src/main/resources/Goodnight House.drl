@@ -18,7 +18,7 @@ end
 rule "Enable Goodnight house switch"
    when
        SimpleSwitch(id == "57" && status == "0")
-       exists (SimpleSwitch((floor != "Outdoors" && floor != "Hidden") && status != "0"))
+       SimpleSwitch((floor != "Outdoors" && floor != "Hidden") && status != "0")
    then
        HaEvent event = new HaEvent();
        event.setDeviceId("57");
@@ -31,7 +31,7 @@ end
 rule "Enable first floor switch"
    when
        SimpleSwitch(id == "73" && status == "0")
-       exists (SimpleSwitch(floor == "First Floor" && status != "0"))
+       SimpleSwitch(floor == "First Floor" && status != "0")
    then
        HaEvent event = new HaEvent();
        event.setDeviceId("73");
@@ -44,7 +44,7 @@ end
 rule "Enable second floor switch"
    when
        SimpleSwitch(id == "74" && status == "0")
-       exists (SimpleSwitch(floor == "Second Floor" && status != "0"))
+       SimpleSwitch(floor == "Second Floor" && status != "0")
    then
        HaEvent event = new HaEvent();
        event.setDeviceId("74");
