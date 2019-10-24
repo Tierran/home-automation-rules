@@ -50,3 +50,17 @@ then
     
     insert(e);
 end
+
+rule "Turn off front porch at Sunrise"
+when
+    SimpleSwitch(id == "55")
+    HaEvent(deviceId =="23", value=="0") over window:time(1s)
+then
+    HaEvent e = new HaEvent();
+    e.setDeviceId("55");
+    e.setSource("homeseer");
+    e.setValue("0");
+    e.setSendUpdate(true);
+    
+    insert(e);
+end

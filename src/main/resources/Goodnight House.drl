@@ -3,7 +3,7 @@ import com.ninetailsoftware.model.facts.SimpleSwitch;
 
 rule "Goodnight house"
    when
-       ha : HaEvent( deviceId == "57" ) over window:time(1s)
+       ha : HaEvent( deviceId == "57" && value == "0") over window:time(1s)
        s : SimpleSwitch(status != "0" && floor != "Outdoors")
    then
        HaEvent event = new HaEvent();
@@ -13,6 +13,49 @@ rule "Goodnight house"
        event.setSendUpdate(true);
        insert(event);
 end
+
+rule "Enable Goodnight house switch"
+no-loop
+   when
+       ha : HaEvent( value != "0") over window:time(1s)
+       exists (SimpleSwitch(ha.deviceId == id && floor != "Outdoors"))
+   then
+       HaEvent event = new HaEvent();
+       event.setDeviceId("57");
+       event.setValue("100");
+       event.setSource("homeseer");
+       event.setSendUpdate(true);
+       insert(event);
+end
+
+rule "Enable first floor switch"
+no-loop
+   when
+       ha : HaEvent( value != "0") over window:time(1s)
+       exists (SimpleSwitch(ha.deviceId == id && floor == "First Floor"))
+   then
+       HaEvent event = new HaEvent();
+       event.setDeviceId("73");
+       event.setValue("100");
+       event.setSource("homeseer");
+       event.setSendUpdate(true);
+       insert(event);
+end
+
+rule "Enable second floor switch"
+no-loop
+   when
+       ha : HaEvent( value != "0") over window:time(1s)
+       exists (SimpleSwitch(ha.deviceId == id && floor == "Second Floor"))
+   then
+       HaEvent event = new HaEvent();
+       event.setDeviceId("74");
+       event.setValue("100");
+       event.setSource("homeseer");
+       event.setSendUpdate(true);
+       insert(event);
+end
+
 
 rule "1st Level Power"
    when

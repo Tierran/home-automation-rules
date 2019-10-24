@@ -53,6 +53,42 @@ public class FrontPorchRulesTest extends MyTestHelper {
 	}
 
 	@Test
+	public void testFrontPorchLightWhenAwayAtSunrise() throws Exception {
+
+		/**
+		 * I want the front porch light to turn off at sunrise if it had been on all night
+		 */
+		
+		KieSession ksession = testHelper("Update Device Status.drl", "Front Porch Rules.drl");
+
+		TheSun sun = new TheSun();
+		AlarmPanel panel = new AlarmPanel();
+		
+		SimpleSwitch ss = new SimpleSwitch();
+		ss.setId("55");
+		ss.setSource("homeseer");
+		ss.setStatus("255");
+
+		sun.setId("23");
+		sun.setStatus("0");
+		panel.setId("18");
+		panel.setStatus("2");
+
+		HaEvent event2 = new HaEvent();
+		event2.setDeviceId("23");
+		event2.setValue("0");
+		ksession.insert(ss);
+		ksession.insert(event2);
+		ksession.insert(panel);
+
+		ksession.fireAllRules();
+
+		Assert.assertEquals("Check that flood light was turned off", "0", ss.getStatus());
+
+		ksession.dispose();
+	}
+	
+	@Test
 	public void testFrontFloodActivatesAtDusk() throws Exception {
 
 		KieSession ksession = testHelper("Update Device Status.drl", "Front Porch Rules.drl");
@@ -125,7 +161,7 @@ public class FrontPorchRulesTest extends MyTestHelper {
 		clock.advanceTime(29, TimeUnit.HOURS);		
 		rulesFired = ksession.fireAllRules();
 
-		Assert.assertEquals("Front port flood deactivated at Midnight", "0", ss.getStatus());
+		Assert.assertEquals("Front flood deactivated at Midnight", "0", ss.getStatus());
 		Assert.assertEquals("Check that only 2 rules fired",2,rulesFired);
 		
 		/**
@@ -143,7 +179,7 @@ public class FrontPorchRulesTest extends MyTestHelper {
 		clock.advanceTime(2, TimeUnit.HOURS);
 		rulesFired = ksession.fireAllRules();
 		
-		Assert.assertEquals("Front port flood did not deactivate at Noon", "255", ss.getStatus());
+		Assert.assertEquals("Front flood did not deactivate at Noon", "255", ss.getStatus());
 		Assert.assertEquals("Check that no rules fired",0,rulesFired);
 
 		ksession.dispose();
