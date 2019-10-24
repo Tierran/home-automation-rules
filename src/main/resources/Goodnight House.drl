@@ -28,6 +28,20 @@ rule "Enable Goodnight house switch"
        insert(event);
 end
 
+rule "Disable Goodnight house switch"
+   when
+       SimpleSwitch(id == "57" && status == "100")
+       SimpleSwitch(id == "73" && status == "0")
+       SimpleSwitch(id == "74" && status == "0")
+   then
+       HaEvent event = new HaEvent();
+       event.setDeviceId("57");
+       event.setValue("0");
+       event.setSource("homeseer");
+       event.setSendUpdate(true);
+       insert(event);
+end
+
 rule "Enable first floor switch"
    when
        ha : HaEvent(value != "0") over window:time(1s)

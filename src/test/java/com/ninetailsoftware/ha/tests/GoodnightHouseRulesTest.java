@@ -238,4 +238,46 @@ public class GoodnightHouseRulesTest extends MyTestHelper{
 		Assert.assertEquals("Nursery lights turned off", "0", ss2.getStatus());
 		Assert.assertEquals("Outdoor lights not turned off", "255", ss3.getStatus());
 	}
+	
+	@Test
+	public void testDisableGoodnightHouse() throws Exception {
+		KieSession ksession = testHelper("Update Device Status.drl", "Goodnight House.drl");
+		
+		SimpleSwitch ss1 = new SimpleSwitch();
+		ss1.setId("57");
+		ss1.setSource("homeseer");
+		ss1.setStatus("100");
+		ss1.setFloor("Hidden");
+		ss1.setRoom("Hidden");
+		ss1.setDisableWhenAway(false);
+		
+		SimpleSwitch ss2 = new SimpleSwitch();
+		ss2.setId("73");
+		ss2.setSource("homeseer");
+		ss2.setStatus("0");
+		ss2.setFloor("Hidden");
+		ss2.setRoom("Hidden");
+		ss2.setDisableWhenAway(false);
+		
+		SimpleSwitch ss3 = new SimpleSwitch();
+		ss3.setId("74");
+		ss3.setSource("homeseer");
+		ss3.setStatus("100");
+		ss3.setFloor("Hidden");
+		ss3.setRoom("Hidden");
+		ss3.setDisableWhenAway(false);
+		
+		HaEvent event = new HaEvent();
+		event.setDeviceId("74");
+		event.setSource("homeseer");
+		event.setValue("0");
+
+		ksession.insert(ss1);
+		ksession.insert(ss2);
+		ksession.insert(ss3);
+		ksession.insert(event);
+		ksession.fireAllRules();
+		
+		Assert.assertEquals("Master power button disabled", "0", ss1.getStatus());
+	}
 }
