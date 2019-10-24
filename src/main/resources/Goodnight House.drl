@@ -4,7 +4,7 @@ import com.ninetailsoftware.model.facts.SimpleSwitch;
 rule "Goodnight house"
 no-loop
    when
-       ha : HaEvent( deviceId == "57" && value == "0") over window:time(1s)
+       ha : HaEvent( deviceId == "57" && value == "0") over window:length(1)
        s : SimpleSwitch(status != "0" && floor != "Outdoors")
    then
        HaEvent event = new HaEvent();
@@ -18,7 +18,7 @@ end
 rule "Enable Goodnight house switch"
 no-loop
    when
-       ha : HaEvent( value != "0") over window:time(1s)
+       ha : HaEvent( value != "0") over window:length(1)
        exists (SimpleSwitch(ha.deviceId == id && floor != "Outdoors"))
    then
        HaEvent event = new HaEvent();
@@ -32,7 +32,7 @@ end
 rule "Enable first floor switch"
 no-loop
    when
-       ha : HaEvent( value != "0") over window:time(1s)
+       ha : HaEvent( value != "0") over window:length(1)
        exists (SimpleSwitch(ha.deviceId == id && floor == "First Floor"))
    then
        HaEvent event = new HaEvent();
@@ -46,7 +46,7 @@ end
 rule "Enable second floor switch"
 no-loop
    when
-       ha : HaEvent( value != "0") over window:time(1s)
+       ha : HaEvent( value != "0") over window:length(1)
        exists (SimpleSwitch(ha.deviceId == id && floor == "Second Floor"))
    then
        HaEvent event = new HaEvent();
@@ -61,7 +61,7 @@ end
 rule "1st Level Power"
 no-loop
    when
-       ha : HaEvent( deviceId == "73" ) over window:time(1s)
+       ha : HaEvent( deviceId == "73" ) over window:length(1)
        s : SimpleSwitch(status != "0" && floor == "First Floor")
    then
        HaEvent event = new HaEvent();
@@ -75,7 +75,7 @@ end
 rule "2nd Level Power"
 no-loop
    when
-       ha : HaEvent( deviceId == "74" ) over window:time(1s)
+       ha : HaEvent( deviceId == "74" ) over window:length(1)
        s : SimpleSwitch(status != "0" && floor == "Second Floor")
    then
        HaEvent event = new HaEvent();
