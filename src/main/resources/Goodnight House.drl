@@ -55,6 +55,18 @@ rule "Disable first floor switch"
        insert(event);
 end
 
+rule "Disable second floor switch"
+   when
+       not (exists (SimpleSwitch(floor == "Second Floor" && status != "0")))
+   then
+       HaEvent event = new HaEvent();
+       event.setDeviceId("74");
+       event.setValue("0");
+       event.setSource("homeseer");
+       event.setSendUpdate(true);
+       insert(event);
+end
+
 rule "Enable first floor switch"
    when
        ha : HaEvent(value != "0") over window:time(1s)
