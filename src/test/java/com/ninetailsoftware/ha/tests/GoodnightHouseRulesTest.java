@@ -73,6 +73,14 @@ public class GoodnightHouseRulesTest extends MyTestHelper{
 		ss2.setRoom("Hidden");
 		ss2.setDisableWhenAway(false);
 		
+		SimpleSwitch ss3 = new SimpleSwitch();
+		ss2.setId("73");
+		ss2.setSource("homeseer");
+		ss2.setStatus("0");
+		ss2.setFloor("Hidden");
+		ss2.setRoom("Hidden");
+		ss2.setDisableWhenAway(false);
+		
 		HaEvent event = new HaEvent();
 		event.setDeviceId("26");
 		event.setValue("255");
@@ -80,6 +88,7 @@ public class GoodnightHouseRulesTest extends MyTestHelper{
 		
 		ksession.insert(ss1);
 		ksession.insert(ss2);
+		ksession.insert(ss3);
 		ksession.insert(event);
 		ksession.fireAllRules();
 		

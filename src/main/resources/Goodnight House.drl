@@ -19,6 +19,7 @@ rule "Enable Goodnight house switch"
    when
        SimpleSwitch(id == "57" && status == "0")
        SimpleSwitch((floor != "Outdoors" && floor != "Hidden") && status != "0")
+       SimpleSwitch(floor == "Hidden" && status == "100") 
    then
        HaEvent event = new HaEvent();
        event.setDeviceId("57");
@@ -30,9 +31,9 @@ end
 
 rule "Disable Goodnight house switch"
    when
-       SimpleSwitch(id == "57" && status == "100")
-       SimpleSwitch(id == "73" && status == "0")
-       SimpleSwitch(id == "74" && status == "0")
+       ss1 : SimpleSwitch(id == "57" && status == "100")
+       ss2 : SimpleSwitch(id == "73" && status == "0")
+       ss3 : SimpleSwitch(id == "74" && status == "0")
    then
        HaEvent event = new HaEvent();
        event.setDeviceId("57");
