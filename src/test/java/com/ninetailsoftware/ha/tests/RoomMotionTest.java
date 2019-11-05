@@ -31,21 +31,21 @@ public class RoomMotionTest extends MyTestHelper{
 		officeLight.setRoom("Office");
 		
 		MotionSensor ms = new MotionSensor();
-		ms.setId("34");
+		ms.setId("32");
 		ms.setFloor("Second Floor");
 		ms.setRoom("Office");
 		
 	    HaEvent ha = new HaEvent();
 	    ha.setSource("homeseer");
 	    ha.setValue("0");
-	    ha.setDeviceId("34");
+	    ha.setDeviceId("32");
 	    ha.setFloor("Second Floor");
 	    ha.setRoom("Office");
 	    
 	    HaEvent ha2 = new HaEvent();
 	    ha2.setSource("homeseer");
 	    ha2.setValue("8");
-	    ha2.setDeviceId("34");
+	    ha2.setDeviceId("32");
 	    ha2.setFloor("Second Floor");
 	    ha2.setRoom("Office");
 	    

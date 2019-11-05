@@ -8,14 +8,14 @@ import com.ninetailsoftware.ha.home_automation_rules.MyTestHelper;
 import com.ninetailsoftware.model.events.HaEvent;
 import com.ninetailsoftware.model.facts.AlarmPanel;
 
-public class ADTEmailRulesTest extends MyTestHelper {
+public class SecuritySystemRulesTest extends MyTestHelper {
 
 	@Test
 	public void testAlarmArmedAway() throws Exception {
-		KieSession ksession = testHelper("Update Device Status.drl", "ADT Email Rules.drl");
+		KieSession ksession = testHelper("Update Device Status.drl", "Security System Rules.drl");
 		
 		HaEvent ha = new HaEvent();
-		ha.setValue("Security System Armed Away");
+		ha.setValue("System Armed (away mode)");
 		
 		AlarmPanel panel = new AlarmPanel();
 		panel.setId("18");
@@ -31,10 +31,10 @@ public class ADTEmailRulesTest extends MyTestHelper {
 	
 	@Test
 	public void testAlarmArmedStay() throws Exception {
-		KieSession ksession = testHelper("Update Device Status.drl", "ADT Email Rules.drl");
+		KieSession ksession = testHelper("Update Device Status.drl", "Security System Rules.drl");
 		
 		HaEvent ha = new HaEvent();
-		ha.setValue("Security System Armed Stay");
+		ha.setValue("System Armed (home mode)");
 		
 		AlarmPanel panel = new AlarmPanel();
 		panel.setId("18");
@@ -50,10 +50,10 @@ public class ADTEmailRulesTest extends MyTestHelper {
 	
 	@Test
 	public void testAlarmDisarmed() throws Exception {
-		KieSession ksession = testHelper("Update Device Status.drl", "ADT Email Rules.drl");
+		KieSession ksession = testHelper("Update Device Status.drl", "Security System Rules.drl");
 		
 		HaEvent ha = new HaEvent();
-		ha.setValue("Security System Disarmed");
+		ha.setValue("System Disarmed");
 		
 		AlarmPanel panel = new AlarmPanel();
 		panel.setId("18");
