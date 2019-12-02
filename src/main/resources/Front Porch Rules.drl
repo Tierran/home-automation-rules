@@ -54,7 +54,7 @@ end
 rule "Turn off front porch at Sunrise"
 when
     SimpleSwitch(id == "55")
-    HaEvent(deviceId =="23", value=="100") over window:time(1s)
+    HaEvent(deviceId =="23", value=="1") over window:time(1s)
 then
     HaEvent e = new HaEvent();
     e.setDeviceId("55");

@@ -76,7 +76,7 @@ public class FrontPorchRulesTest extends MyTestHelper {
 
 		HaEvent event2 = new HaEvent();
 		event2.setDeviceId("23");
-		event2.setValue("0");
+		event2.setValue("1");
 		ksession.insert(ss);
 		ksession.insert(event2);
 		ksession.insert(panel);
