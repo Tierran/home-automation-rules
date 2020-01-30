@@ -3,7 +3,7 @@ import com.ninetailsoftware.model.facts.SimpleSwitch;
 
 rule "Set all switches to off"
    when
-       ha : HaEvent( deviceId == "118" ) over window:time(1s)
+       ha : HaEvent( deviceId == "216" ) over window:time(1s)
        s : SimpleSwitch(status != "0" && s.isDisableWhenAway() && ha.value == "2")
    then
        HaEvent event = new HaEvent();
