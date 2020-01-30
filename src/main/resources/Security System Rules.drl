@@ -3,13 +3,13 @@ import com.ninetailsoftware.model.facts.AlarmPanel;
 
 rule "Alarm Armed Away"
 when
-    he : HaEvent(value == "2" && deviceId == "118") over window:time(1s)
+    he : HaEvent(value == "2" && deviceId == "216") over window:time(1s)
     AlarmPanel(he.deviceId == id && he.value != status)
 then
     HaEvent ha = new HaEvent();
     ha.setSource("homeseer");
     ha.setValue("2");
-    ha.setDeviceId("118");
+    ha.setDeviceId("216");
     ha.setSendUpdate(true);
     
     insert(ha);
@@ -17,13 +17,13 @@ end
 
 rule "Alarm Armed Stay"
 when
-    he : HaEvent(value == "1" && deviceId == "118") over window:time(1s)
+    he : HaEvent(value == "1" && deviceId == "216") over window:time(1s)
     AlarmPanel(he.deviceId == id && he.value != status)
 then
     HaEvent ha = new HaEvent();
     ha.setSource("homeseer");
     ha.setValue("1");
-    ha.setDeviceId("118");
+    ha.setDeviceId("216");
     ha.setSendUpdate(true);
     
     insert(ha);
@@ -31,13 +31,13 @@ end
 
 rule "Alarm Disarmed"
 when
-    he : HaEvent(value == "0" && deviceId == "118") over window:time(1s)
+    he : HaEvent(value == "0" && deviceId == "216") over window:time(1s)
     AlarmPanel(he.deviceId == id && he.value != status)
 then
     HaEvent ha = new HaEvent();
     ha.setSource("homeseer");
     ha.setValue("0");
-    ha.setDeviceId("118");
+    ha.setDeviceId("216");
     ha.setSendUpdate(true);    
     
     insert(ha);
