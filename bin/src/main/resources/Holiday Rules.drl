@@ -1,0 +1,34 @@
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import com.ninetailsoftware.model.facts.ElectricOutlet;
+import com.ninetailsoftware.model.events.HaEvent;
+
+rule "Turn off holiday lights at 10:00"
+   timer(cron: 0 0 22 * * ?)
+when
+    ElectricOutlet(id == "71")
+then
+    HaEvent e = new HaEvent();
+    e.setDeviceId("71");
+    e.setSource("homeseer");
+    e.setValue("0");
+    e.setSendUpdate(true);
+    
+    insert(e);
+end
+
+rule "Turn on holiday lights at Dusk"
+
+when
+    HaEvent(deviceId =="23", value=="2") over window:time(1s)
+then
+    HaEvent e = new HaEvent();
+    e.setDeviceId("71");
+    e.setSource("homeseer");
+    e.setValue("255");
+    e.setSendUpdate(true);
+    
+    insert(e);
+end

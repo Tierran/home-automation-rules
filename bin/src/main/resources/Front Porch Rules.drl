@@ -1,0 +1,66 @@
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import com.ninetailsoftware.model.facts.SimpleSwitch;
+import com.ninetailsoftware.model.events.HaEvent;
+import com.ninetailsoftware.model.facts.AlarmPanel;
+import com.ninetailsoftware.model.facts.TheSun;
+
+rule "Turn off front flood at Midnight"
+   timer(cron: 0 0 0 * * ?)
+when
+    SimpleSwitch(id == "54")
+then
+    HaEvent e = new HaEvent();
+    e.setDeviceId("54");
+    e.setSource("homeseer");
+    e.setValue("0");
+    e.setSendUpdate(true);
+    
+    insert(e);
+end
+
+rule "Turn on front flood at Dusk"
+
+when
+    HaEvent(deviceId =="23", value=="2") over window:time(1s)
+then
+    HaEvent e = new HaEvent();
+    e.setDeviceId("54");
+    e.setSource("homeseer");
+    e.setValue("255");
+    e.setSendUpdate(true);
+    
+    insert(e);
+end
+
+
+rule "Turn on front porch at Dusk when away"
+
+when
+	TheSun(id == "23" && (status == "2" || status == "3"))
+	AlarmPanel(id == "18" && status == "2")
+then
+    HaEvent e = new HaEvent();
+    e.setDeviceId("55");
+    e.setSource("homeseer");
+    e.setValue("255");
+    e.setSendUpdate(true);
+    
+    insert(e);
+end
+
+rule "Turn off front porch at Sunrise"
+when
+    SimpleSwitch(id == "55")
+    HaEvent(deviceId =="23", value=="1") over window:time(1s)
+then
+    HaEvent e = new HaEvent();
+    e.setDeviceId("55");
+    e.setSource("homeseer");
+    e.setValue("0");
+    e.setSendUpdate(true);
+    
+    insert(e);
+end

@@ -1,0 +1,50 @@
+import com.ninetailsoftware.model.events.HaEvent;
+import com.ninetailsoftware.model.facts.SimpleSwitch;
+
+/**
+* This rule will link the small bank of lights operation back into the dining room lights.  Melanie has requested
+* they be disabled for now but if we want to relink them, we can simply uncomment this rule
+
+rule "Turn All Switches On"
+no-loop true
+   when
+       ha : HaEvent((deviceId == "25" || deviceId == "26") && (value == "0" || value == "99"))
+   then
+       HaEvent event = new HaEvent();
+       if(ha.getDeviceId().equals("25"))
+        event.setDeviceId("26");
+       else
+        event.setDeviceId("25");
+       event.setValue(ha.getValue());
+       event.setSource("brms");
+       insert(event);
+end */
+
+rule "Turn Lights On When Off with Remote Switch"
+when
+    ha : HaEvent(deviceId == "36") over window:time(2s)
+    SimpleSwitch(id == "25" && status == "0")
+    not(exists HaEvent(deviceId == " 25") over window:time(2s))
+then
+    retract(ha);
+    HaEvent event = new HaEvent();
+    event.setDeviceId("25");
+    event.setValue("99");
+    event.setSource("homeseer");
+    event.setSendUpdate(true);
+    insert(event);
+end
+
+rule "Turn Lights Off When On with Remote Switch"
+when
+    ha : HaEvent(deviceId == "36") over window:time(2s)
+    SimpleSwitch(id == "25" && status != "0")
+    not(exists HaEvent(deviceId == "25") over window:time(2s))
+then
+    retract(ha);
+    HaEvent event = new HaEvent();
+    event.setDeviceId("25");
+    event.setValue("0");
+    event.setSource("brms");
+    insert(event);
+end
