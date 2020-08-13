@@ -1,6 +1,19 @@
 import com.ninetailsoftware.model.events.HaEvent;
 import com.ninetailsoftware.model.facts.AlarmPanel;
 
+rule "Alarm Armed Away : Email Notification"
+when
+	he : HaEvent(value == "System Armed (away mode)")  over window:time(1s)
+then
+    HaEvent ha = new HaEvent();
+    ha.setSource("homeseer");
+    ha.setValue("2");
+    ha.setDeviceId("216");
+    ha.setSendUpdate(true);
+    
+    insert(ha);
+end
+
 rule "Alarm Armed Away"
 when
     he : HaEvent(value == "2" && deviceId == "216") over window:time(1s)
@@ -15,6 +28,19 @@ then
     insert(ha);
 end
 
+rule "Alarm Armed Home : Email Notification"
+when
+	he : HaEvent(value == "System Armed (home mode)")  over window:time(1s)
+then
+    HaEvent ha = new HaEvent();
+    ha.setSource("homeseer");
+    ha.setValue("1");
+    ha.setDeviceId("216");
+    ha.setSendUpdate(true);
+    
+    insert(ha);
+end
+
 rule "Alarm Armed Stay"
 when
     he : HaEvent(value == "1" && deviceId == "216") over window:time(1s)
@@ -23,6 +49,19 @@ then
     HaEvent ha = new HaEvent();
     ha.setSource("homeseer");
     ha.setValue("1");
+    ha.setDeviceId("216");
+    ha.setSendUpdate(true);
+    
+    insert(ha);
+end
+
+rule "Alarm Disarmed : Email Notification"
+when
+	he : HaEvent(value == "System Disarmed")  over window:time(1s)
+then
+    HaEvent ha = new HaEvent();
+    ha.setSource("homeseer");
+    ha.setValue("0");
     ha.setDeviceId("216");
     ha.setSendUpdate(true);
     
