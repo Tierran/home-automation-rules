@@ -34,7 +34,7 @@ public class AwayModeRulesTest extends MyTestHelper {
 	    HaEvent ha = new HaEvent();
 	    ha.setSource("homeseer");
 	    ha.setValue("2");
-	    ha.setDeviceId("216");
+	    ha.setDeviceId("18");
 	    ha.setSendUpdate(true);
 
 		ksession.insert(ss1);

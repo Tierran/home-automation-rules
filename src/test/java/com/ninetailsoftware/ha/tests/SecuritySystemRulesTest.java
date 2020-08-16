@@ -16,10 +16,10 @@ public class SecuritySystemRulesTest extends MyTestHelper {
 		
 		HaEvent ha = new HaEvent();
 		ha.setValue("2");
-		ha.setDeviceId("216");
+		ha.setDeviceId("18");
 		
 		AlarmPanel panel = new AlarmPanel();
-		panel.setId("216");
+		panel.setId("18");
 		panel.setStatus("0");
 		panel.setSource("homeseer");
 		
@@ -36,10 +36,10 @@ public class SecuritySystemRulesTest extends MyTestHelper {
 		
 		HaEvent ha = new HaEvent();
 		ha.setValue("System Armed (away mode)");
-		ha.setDeviceId("216");
+		ha.setDeviceId("18");
 		
 		AlarmPanel panel = new AlarmPanel();
-		panel.setId("216");
+		panel.setId("18");
 		panel.setStatus("0");
 		panel.setSource("homeseer");
 		
@@ -56,10 +56,10 @@ public class SecuritySystemRulesTest extends MyTestHelper {
 		
 		HaEvent ha = new HaEvent();
 		ha.setValue("1");
-		ha.setDeviceId("216");
+		ha.setDeviceId("18");
 		
 		AlarmPanel panel = new AlarmPanel();
-		panel.setId("216");
+		panel.setId("18");
 		panel.setStatus("0");
 		panel.setSource("homeseer");
 		
@@ -78,7 +78,7 @@ public class SecuritySystemRulesTest extends MyTestHelper {
 		ha.setValue("System Armed (home mode)");
 		
 		AlarmPanel panel = new AlarmPanel();
-		panel.setId("216");
+		panel.setId("18");
 		panel.setStatus("0");
 		panel.setSource("homeseer");
 		
@@ -95,10 +95,10 @@ public class SecuritySystemRulesTest extends MyTestHelper {
 		
 		HaEvent ha = new HaEvent();
 		ha.setValue("0");
-		ha.setDeviceId("216");
+		ha.setDeviceId("18");
 		
 		AlarmPanel panel = new AlarmPanel();
-		panel.setId("216");
+		panel.setId("18");
 		panel.setStatus("2");
 		panel.setSource("homeseer");
 		
@@ -117,7 +117,7 @@ public class SecuritySystemRulesTest extends MyTestHelper {
 		ha.setValue("System Disarmed");
 		
 		AlarmPanel panel = new AlarmPanel();
-		panel.setId("216");
+		panel.setId("18");
 		panel.setStatus("2");
 		panel.setSource("homeseer");
 		
