@@ -8,10 +8,10 @@ import com.ninetailsoftware.model.events.HaEvent;
 rule "Turn off Pergola automatically"
    timer(cron: 0 0 21 * * ?)
 when
-    ElectricOutlet(id == "48")
+    ElectricOutlet(id == "296")
 then
     HaEvent e = new HaEvent();
-    e.setDeviceId("48");
+    e.setDeviceId("296");
     e.setSource("homeseer");
     e.setValue("0");
     e.setSendUpdate(true);
@@ -25,7 +25,7 @@ when
     HaEvent(deviceId =="23", value=="2") over window:time(1s)
 then
     HaEvent e = new HaEvent();
-    e.setDeviceId("48");
+    e.setDeviceId("296");
     e.setSource("homeseer");
     e.setValue("255");
     e.setSendUpdate(true);
