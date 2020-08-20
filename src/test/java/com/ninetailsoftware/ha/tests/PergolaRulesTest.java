@@ -26,7 +26,7 @@ public class PergolaRulesTest extends MyTestHelper {
 		 */
 		
 		ElectricOutlet eo = new ElectricOutlet();
-		eo.setId("48");
+		eo.setId("296");
 		eo.setSource("homeseer");
 		eo.setStatus("0");
 
@@ -63,7 +63,7 @@ public class PergolaRulesTest extends MyTestHelper {
 		
 		
 		ElectricOutlet eo = new ElectricOutlet();
-		eo.setId("48");
+		eo.setId("296");
 		eo.setSource("homeseer");
 		eo.setStatus("255");
 		
