@@ -20,3 +20,4 @@ org.eclipse.jdt.core.prefs
 component
 **/.classpath
 **/.project
+/bin/

@@ -5,7 +5,7 @@ import java.util.Calendar;
 import com.ninetailsoftware.model.facts.ElectricOutlet;
 import com.ninetailsoftware.model.events.HaEvent;
 
-rule "Turn off holiday lights at 10:00"
+rule "Turn off holiday lights at 2200"
    timer(cron: 0 0 22 * * ?)
 when
     ElectricOutlet(id == "71")
@@ -19,10 +19,10 @@ then
     insert(e);
 end
 
-rule "Turn on holiday lights at Dusk"
-
+rule "Turn on holiday lights at 1630"
+  timer(cron: 0 30 16 * * ?)
 when
-    HaEvent(deviceId =="23", value=="2") over window:time(1s)
+    ElectricOutlet(id == "71")
 then
     HaEvent e = new HaEvent();
     e.setDeviceId("71");
